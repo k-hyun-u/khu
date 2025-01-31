@@ -1,0 +1,18 @@
+{
+  "words": [
+    {
+      "id": 1,
+      "english": "Ballroom",
+      "pronunciation": "/ˈbɔːlruːm/",
+      "korean": "볼룸, 무도장",
+      "audio": "ballroom.mp3"
+    },
+    {
+      "id": 2,
+      "english": "Waltz",
+      "pronunciation": "/wɔːlts/",
+      "korean": "왈츠",
+      "audio": "waltz.mp3"
+    }
+  ]
+}
