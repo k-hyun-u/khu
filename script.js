@@ -20,7 +20,7 @@ const progressBar = document.getElementById('progressBar');
 // 단어 데이터 로드
 async function loadWords() {
     try {
-        const response = await fetch('words.json');
+        const response = await fetch('./words.json');
         const data = await response.json();
         words = data.words;
     } catch (error) {
