@@ -1,0 +1,215 @@
+{
+    "words": [
+      {
+        "id": 1,
+        "english": "Ballroom",
+        "pronunciation": "/ˈbɔːlruːm/",
+        "korean": "볼룸, 무도장",
+        "audio": "ballroom.mp3"
+      },
+      {
+        "id": 2,
+        "english": "Waltz",
+        "pronunciation": "/wɔːlts/",
+        "korean": "왈츠",
+        "audio": "waltz.mp3"
+      },
+      {
+        "id": 3,
+        "english": "Tango",
+        "pronunciation": "/ˈtæŋɡəʊ/",
+        "korean": "탱고",
+        "audio": "tango.mp3"
+      },
+      {
+        "id": 4,
+        "english": "Quickstep",
+        "pronunciation": "/ˈkwɪkstep/",
+        "korean": "퀵스텝",
+        "audio": "quickstep.mp3"
+      },
+      {
+        "id": 5,
+        "english": "Foxtrot",
+        "pronunciation": "/ˈfɒkstrɒt/",
+        "korean": "폭스트롯",
+        "audio": "foxtrot.mp3"
+      },
+      {
+        "id": 6,
+        "english": "Posture",
+        "pronunciation": "/ˈpɒstʃər/",
+        "korean": "자세",
+        "audio": "posture.mp3"
+      },
+      {
+        "id": 7,
+        "english": "Partner",
+        "pronunciation": "/ˈpɑːtnər/",
+        "korean": "파트너",
+        "audio": "partner.mp3"
+      },
+      {
+        "id": 8,
+        "english": "Lead",
+        "pronunciation": "/liːd/",
+        "korean": "리드(이끌다)",
+        "audio": "lead.mp3"
+      },
+      {
+        "id": 9,
+        "english": "Follow",
+        "pronunciation": "/ˈfɒləʊ/",
+        "korean": "팔로우(따르다)",
+        "audio": "follow.mp3"
+      },
+      {
+        "id": 10,
+        "english": "Step",
+        "pronunciation": "/step/",
+        "korean": "스텝",
+        "audio": "step.mp3"
+      },
+      {
+        "id": 11,
+        "english": "Turn",
+        "pronunciation": "/tɜːn/",
+        "korean": "턴(회전)",
+        "audio": "turn.mp3"
+      },
+      {
+        "id": 12,
+        "english": "Rhythm",
+        "pronunciation": "/ˈrɪðəm/",
+        "korean": "리듬",
+        "audio": "rhythm.mp3"
+      },
+      {
+        "id": 13,
+        "english": "Balance",
+        "pronunciation": "/ˈbæləns/",
+        "korean": "밸런스",
+        "audio": "balance.mp3"
+      },
+      {
+        "id": 14,
+        "english": "Frame",
+        "pronunciation": "/freɪm/",
+        "korean": "프레임(자세틀)",
+        "audio": "frame.mp3"
+      },
+      {
+        "id": 15,
+        "english": "Choreography",
+        "pronunciation": "/ˌkɒriˈɒɡrəfi/",
+        "korean": "안무",
+        "audio": "choreography.mp3"
+      },
+      {
+        "id": 16,
+        "english": "Spin",
+        "pronunciation": "/spɪn/",
+        "korean": "스핀(회전)",
+        "audio": "spin.mp3"
+      },
+      {
+        "id": 17,
+        "english": "Promenade",
+        "pronunciation": "/ˌprɒməˈnɑːd/",
+        "korean": "프로미나드",
+        "audio": "promenade.mp3"
+      },
+      {
+        "id": 18,
+        "english": "Rise",
+        "pronunciation": "/raɪz/",
+        "korean": "라이즈(상승)",
+        "audio": "rise.mp3"
+      },
+      {
+        "id": 19,
+        "english": "Fall",
+        "pronunciation": "/fɔːl/",
+        "korean": "폴(하강)",
+        "audio": "fall.mp3"
+      },
+      {
+        "id": 20,
+        "english": "Swing",
+        "pronunciation": "/swɪŋ/",
+        "korean": "스윙",
+        "audio": "swing.mp3"
+      },
+      {
+        "id": 21,
+        "english": "Sway",
+        "pronunciation": "/sweɪ/",
+        "korean": "스웨이(몸의 기울기)",
+        "audio": "sway.mp3"
+      },
+      {
+        "id": 22,
+        "english": "Pivot",
+        "pronunciation": "/ˈpɪvət/",
+        "korean": "피봇(축회전)",
+        "audio": "pivot.mp3"
+      },
+      {
+        "id": 23,
+        "english": "Line",
+        "pronunciation": "/laɪn/",
+        "korean": "라인(선)",
+        "audio": "line.mp3"
+      },
+      {
+        "id": 24,
+        "english": "Movement",
+        "pronunciation": "/ˈmuːvmənt/",
+        "korean": "동작",
+        "audio": "movement.mp3"
+      },
+      {
+        "id": 25,
+        "english": "Technique",
+        "pronunciation": "/tekˈniːk/",
+        "korean": "테크닉",
+        "audio": "technique.mp3"
+      },
+      {
+        "id": 26,
+        "english": "Figure",
+        "pronunciation": "/ˈfɪɡər/",
+        "korean": "피겨(동작패턴)",
+        "audio": "figure.mp3"
+      },
+      {
+        "id": 27,
+        "english": "Timing",
+        "pronunciation": "/ˈtaɪmɪŋ/",
+        "korean": "타이밍",
+        "audio": "timing.mp3"
+      },
+      {
+        "id": 28,
+        "english": "Direction",
+        "pronunciation": "/dəˈrekʃn/",
+        "korean": "방향",
+        "audio": "direction.mp3"
+      },
+      {
+        "id": 29,
+        "english": "Position",
+        "pronunciation": "/pəˈzɪʃn/",
+        "korean": "포지션",
+        "audio": "position.mp3"
+      },
+      {
+        "id": 30,
+        "english": "Routine",
+        "pronunciation": "/ruːˈtiːn/",
+        "korean": "루틴(동작순서)",
+        "audio": "routine.mp3"
+      }
+    ]
+  }
+  
