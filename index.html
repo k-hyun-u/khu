@@ -6,292 +6,240 @@
     <title>Dance Terms Study</title>
     <style>
         body {
-    margin: 0;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-h1 {
-    text-align: center;
-    color: #333;
-    font-size: 32px;
-    margin-bottom: 30px;
-}
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
 
-/* 학습 통계 스타일 */
-.study-stats {
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 15px;
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        .study-stats {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-.stat-item {
-    margin: 15px 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    font-size: 20px;
-}
+        .stat-item {
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 20px;
+        }
 
-.stat-label {
-    font-weight: bold;
-    color: #333;
-}
+        .stat-label {
+            font-weight: bold;
+            color: #333;
+        }
 
-.stat-value {
-    color: #4CAF50;
-    font-weight: bold;
-}
+        .stat-value {
+            color: #4CAF50;
+            font-weight: bold;
+        }
 
-/* 설정 영역 스타일 */
-.settings {
-    margin: 30px 0;
-    text-align: center;
-}
+        .settings {
+            margin: 30px 0;
+            text-align: center;
+        }
 
-.settings label {
-    display: block;
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333;
-}
+        .settings label {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
 
-#repeatCount {
-    padding: 15px;
-    font-size: 24px;
-    width: 150px;
-    margin: 10px auto 30px;
-    border: 2px solid #4CAF50;
-    border-radius: 10px;
-    text-align: center;
-    display: block;
-}
+        #repeatCount {
+            padding: 15px;
+            font-size: 24px;
+            width: 150px;
+            margin: 10px auto 30px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            text-align: center;
+            display: block;
+        }
 
-/* 시작 버튼 스타일 */
-.start-btn {
-    display: block;
-    width: 80%;
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    font-size: 24px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-}
+        .word-card {
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            text-align: center;
+        }
 
-#autoStartBtn {
-    background-color: #4CAF50;
-    color: white;
-}
+        .word-card .english {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2196F3;
+        }
 
-#autoStartBtn:hover {
-    background-color: #45a049;
-}
+        .word-card .pronunciation {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
 
-#manualStartBtn {
-    background-color: #2196F3;
-    color: white;
-}
+        .word-card .korean {
+            font-size: 28px;
+            line-height: 1.5;
+            color: #444;
+        }
 
-#manualStartBtn:hover {
-    background-color: #1976D2;
-}
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
 
-/* 단어 카드 스타일 */
-.word-card {
-    padding: 30px;
-    margin: 20px 0;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    background-color: white;
-    text-align: center;
-}
+        #progressBar {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
 
-.word-card .english {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #2196F3;
-}
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
 
-.word-card .pronunciation {
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
+        button {
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            font-size: 24px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 10px auto;
+        }
 
-.word-card .korean {
-    font-size: 28px;
-    line-height: 1.5;
-    color: #444;
-}
+        #autoStartBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
 
-/* 진행 바 스타일 */
-.progress-bar {
-    width: 100%;
-    height: 15px;
-    background-color: #eee;
-    border-radius: 10px;
-    margin: 20px 0;
-    overflow: hidden;
-}
+        #manualStartBtn {
+            background-color: #2196F3;
+            color: white;
+        }
 
-#progressBar {
-    height: 100%;
-    background-color: #4CAF50;
-    border-radius: 10px;
-    transition: width 0.3s ease;
-    width: 0%;
-}
+        #nextBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
 
-/* 컨트롤 버튼 스타일 */
-.controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin: 20px 0;
-}
+        #replayBtn {
+            background-color: #FFC107;
+            color: black;
+        }
 
-#manualControls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-}
+        #stopBtn {
+            background-color: #ff6b6b;
+            color: white;
+        }
 
-.controls button {
-    width: 80%;
-    max-width: 400px;
-    padding: 20px;
-    font-size: 24px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-}
+        #restartBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
 
-#nextBtn {
-    background-color: #4CAF50;
-    color: white;
-}
+        button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
 
-#nextBtn:hover {
-    background-color: #45a049;
-}
+        button:active {
+            transform: translateY(1px);
+        }
 
-#replayBtn {
-    background-color: #FFC107;
-    color: black;
-}
+        .result-summary {
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
 
-#replayBtn:hover {
-    background-color: #FFA000;
-}
+        .result-summary h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-#stopBtn {
-    background-color: #ff6b6b;
-    color: white;
-}
+        .result-summary p {
+            font-size: 24px;
+            color: #666;
+            margin: 10px 0;
+        }
 
-#stopBtn:hover {
-    background-color: #ff5252;
-}
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
 
-#restartBtn {
-    background-color: #4CAF50;
-    color: white;
-}
+            .container {
+                padding: 15px;
+            }
 
-#restartBtn:hover {
-    background-color: #45a049;
-}
+            button {
+                width: 90%;
+                font-size: 20px;
+                padding: 15px;
+            }
 
-/* 버튼 공통 효과 */
-button:hover {
-    transform: translateY(-2px);
-}
+            .word-card .english {
+                font-size: 22px;
+            }
 
-button:active {
-    transform: translateY(1px);
-}
+            .word-card .pronunciation {
+                font-size: 28px;
+            }
 
-/* 결과 요약 스타일 */
-.result-summary {
-    padding: 30px;
-    margin: 20px 0;
-    border-radius: 15px;
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
+            .word-card .korean {
+                font-size: 24px;
+            }
 
-.result-summary h3 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-}
+            .settings label {
+                font-size: 20px;
+            }
 
-.result-summary p {
-    font-size: 24px;
-    color: #666;
-    margin: 10px 0;
-}
-
-/* 모바일 반응형 스타일 */
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        padding: 15px;
-    }
-
-    button {
-        width: 90%;
-        font-size: 20px;
-        padding: 15px;
-    }
-
-    .word-card .english {
-        font-size: 22px;
-    }
-
-    .word-card .pronunciation {
-        font-size: 28px;
-    }
-
-    .word-card .korean {
-        font-size: 24px;
-    }
-
-    .settings label {
-        font-size: 20px;
-    }
-
-    #repeatCount {
-        font-size: 20px;
-        width: 120px;
-    }
-}
+            #repeatCount {
+                font-size: 20px;
+                width: 120px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -308,8 +256,8 @@ button:active {
                     <option value="4">4회</option>
                     <option value="5">5회</option>
                 </select>
-                <button id="autoStartBtn" class="start-btn">자동 반복 학습 시작</button>
-                <button id="manualStartBtn" class="start-btn">한 단어씩 학습 시작</button>
+                <button id="autoStartBtn">자동 반복 학습 시작</button>
+                <button id="manualStartBtn">한 단어씩 학습 시작</button>
             </div>
         </div>
 
