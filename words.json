@@ -88,7 +88,7 @@
       "english": "drag draw",
       "pronunciation": "드레그 드로우",
       "korean": "끌어당기는 동작이나 발을 끄는 동작",
-      "audioFile": "drag-draw.mp3"
+      "audioFile": "dragdraw.mp3"
     },
     {
       "english": "ronde",
@@ -202,37 +202,37 @@
       "english": "rock and recover",
       "pronunciation": "락앤리커버",
       "korean": "체중을 왼발에서 오른발 또는 오른발에서 왼발로 바꾸어 옮기는 동작",
-      "audioFile": "rock-and-recover.mp3"
+      "audioFile": "rockandrecover.mp3"
     },
     {
       "english": "rocking chair",
       "pronunciation": "라킹체어",
       "korean": "오른발을 앞으로 락 스텝(1), 왼발 제자리 스텝(2), 오른발 뒤로 라 스텝(3), 왼발 제자리 스텝(4)",
-      "audioFile": "rocking-chair.mp3"
+      "audioFile": "rockingchair.mp3"
     },
     {
       "english": "jazz box",
       "pronunciation": "째즈박스",
       "korean": "오른발을 왼발 옆으로 크로스(1), 왼발 뒤로 스텝(2), 오른발 옆으로 스텝(3), 왼발을 오른발에 모으며 스텝(4)",
-      "audioFile": "jazz-box.mp3"
+      "audioFile": "jazzbox.mp3"
     },
     {
       "english": "shuffle step",
       "pronunciation": "셔플 스텝",
       "korean": "스텝(1)모아(2) 스텝(3), 발바닥 전체로 바닥을 문지르듯이 발을 끌며 걷는다.",
-      "audioFile": "shuffle-step.mp3"
+      "audioFile": "shufflestep.mp3"
     },
     {
       "english": "cha cha cha",
       "pronunciation": "차 차 차",
       "korean": "오른(왼)발을 옆으로 스텝(1), 왼발을 오른발 옆에 모으며 스텝(&), 오른발 옆으로 스텝(2)(제자리, 앞, 옆, 뒤 방향 가능)",
-      "audioFile": "cha-cha-cha.mp3"
+      "audioFile": "chachacha.mp3"
     },
     {
       "english": "lock step",
       "pronunciation": "락 스텝",
       "korean": "오른발과 발이 앞뒤로 엇갈린 상태로 자물쇠로 채우듯 고정시키는 동작",
-      "audioFile": "lock-step.mp3"
+      "audioFile": "lockstep.mp3"
     },
     {
       "english": "manbo",
@@ -250,25 +250,25 @@
       "english": "sailor step",
       "pronunciation": "세일러 스텝",
       "korean": "오른발을 발 뒤에 크로스(1), 왼발은 옆으로 스텝(2), 오른발 제자리 스텝(3)",
-      "audioFile": "sailor-step.mp3"
+      "audioFile": "sailorstep.mp3"
     },
     {
       "english": "scissor step",
       "pronunciation": "시저 스텝",
       "korean": "오른발을 옆으로 스텝(1), 왼발은 오른발 옆에 모으며 스텝(2), 오른발을 왼발 앞에 크로스(3)",
-      "audioFile": "scissor-step.mp3"
+      "audioFile": "scissorstep.mp3"
     },
     {
       "english": "kick ball change",
       "pronunciation": "킥 볼 체인지",
       "korean": "오른(왼)발을 앞으로 한 후(1), 볼로 딛고(2), 왼(오른)발에 체중을 옮기는 동작(3)",
-      "audioFile": "kick-ball-change.mp3"
+      "audioFile": "kickballchange.mp3"
     },
     {
       "english": "skate step",
       "pronunciation": "스케이트 스텝",
       "korean": "발을 비껴 앞으로 슬라이드하는 스텝",
-      "audioFile": "skate-step.mp3"
+      "audioFile": "skatestep.mp3"
     },
     {
       "english": "charleston",
@@ -280,37 +280,37 @@
       "english": "sugar foot",
       "pronunciation": "슈가 풋",
       "korean": "발끝을 제자리에서 안쪽으로 찍고, 뒤꿈치를 아웃시켜 찍는 동작",
-      "audioFile": "sugar-foot.mp3"
+      "audioFile": "sugarfoot.mp3"
     },
     {
       "english": "monterey turn",
       "pronunciation": "몬트레이 턴",
       "korean": "왼 무릎은 약간 굽히고 오른발을 옆으로 터치(1) 후, 오른쪽으로 12 또는 14회전하면서 왼발을 모으며 스텝(2). 왼발을 옆으로 뻗어낸(3) 후 오른발을 모으며 스텝(4)",
-      "audioFile": "monterey-turn.mp3"
+      "audioFile": "montereyturn.mp3"
     },
     {
       "english": "pivot turn",
       "pronunciation": "피봇 턴",
       "korean": "체중을 한쪽 발에 완전히 싣고(1), 회전하는 동작으로 이때 다른 발은 체중 없이 앞 혹은 뒤에 두고 회전(2)",
-      "audioFile": "pivot-turn.mp3"
+      "audioFile": "pivotturn.mp3"
     },
     {
       "english": "rock turn",
       "pronunciation": "락 턴",
       "korean": "오른발을 앞으로 락 스텝(1), 왼발 제자리 스텝(2), 오른쪽 방향으로 회전 오른발 앞으로 스텝(3)",
-      "audioFile": "rock-turn.mp3"
+      "audioFile": "rockturn.mp3"
     },
     {
       "english": "rolling turn",
       "pronunciation": "롤링 턴",
       "korean": "한쪽 방향으로 쓰리 스텝으로 도는 동작",
-      "audioFile": "rolling-turn.mp3"
+      "audioFile": "rollingturn.mp3"
     },
     {
       "english": "reverse turn",
       "pronunciation": "리버스 턴",
       "korean": "뒤로 도는 동작",
-      "audioFile": "reverse-turn.mp3"
+      "audioFile": "reverseturn.mp3"
     },
     {
       "english": "twinkle",
@@ -322,13 +322,13 @@
       "english": "waltz step",
       "pronunciation": "왈츠 스텝",
       "korean": "오른발을 왼발 앞에 크로스(1), 왼발 옆으로 스텝(2), 오른발 제자리 스텝(3), 뒤로도 행할 수 있음 waltz step : 오른발 앞으로 스텝(1), 왼발을 앞으로 스텝(2), 오른발을 왼발에 모은다(3), 뒤로도 행할 수 있음",
-      "audioFile": "waltz-step.mp3"
+      "audioFile": "waltzstep.mp3"
     },
     {
       "english": "balance step",
       "pronunciation": "밸런스 스텝",
       "korean": "오른발이 오른쪽 옆으로 스텝(1), 왼발이 오른발 뒤로 크로스 스텝(2), 오른발 제자리 스텝(3)",
-      "audioFile": "balance-step.mp3"
+      "audioFile": "balancestep.mp3"
     }
   ]
 }
