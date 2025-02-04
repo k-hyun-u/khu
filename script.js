@@ -311,3 +311,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const repeatSelect = document.getElementById('repeatCount');
     repeatSelect.value = repeatCount;
 });
+
+// PWA 등록
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/khu/service-worker.js')
+            .then(registration => {
+                console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
+}
