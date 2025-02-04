@@ -2,8 +2,8 @@
 let words = [];
 let currentIndex = 0;
 let startTime;
-let timePerWord = 5;
-let timer;
+let repeatCount = 2; // 기본 반복 횟수
+let currentAudio = null; // 현재 재생 중인 오디오 객체
 let studyData = {
     totalStudyTime: 0,
     totalWords: 0,
@@ -113,23 +113,28 @@ function pad(num) {
 
 // 오디오 반복 재생 함수
 function playAudioWithRepeat(audioFile, repeatCount) {
+    // 이전 오디오가 있다면 중지
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+    }
+
     let count = 0;
-    // 절대 경로로 변경
-    const audio = new Audio(`/khu/audio/${audioFile}`);
+    currentAudio = new Audio(`/khu/audio/${audioFile}`);
     
-    audio.addEventListener('ended', function() {
+    currentAudio.addEventListener('ended', function() {
         count++;
         if (count < repeatCount) {
             setTimeout(() => {
-                audio.currentTime = 0;
-                audio.play().catch(error => {
+                currentAudio.currentTime = 0;
+                currentAudio.play().catch(error => {
                     console.log('Audio playback failed:', error);
                 });
-            }, 1000);
+            }, 1000); // 1초 간격
         }
     });
 
-    audio.play().catch(error => {
+    currentAudio.play().catch(error => {
         console.log('Audio playback failed:', error);
     });
 }
@@ -157,18 +162,10 @@ function loadWord(index) {
     document.getElementById('cardContent').innerHTML = cardContent;
     updateProgress();
 
-    // 오디오 재생 (2번 반복)
+    // 오디오 재생
     if (word.audioFile) {
-        playAudioWithRepeat(word.audioFile, 2);
+        playAudioWithRepeat(word.audioFile, repeatCount);
     }
-
-    // 자동 진행 타이머 설정
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => {
-        if (currentIndex < words.length - 1) {
-            nextBtn.click();
-        }
-    }, timePerWord * 1000);
 }
 
 // 진행률 업데이트
@@ -184,7 +181,11 @@ function showResult() {
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
 
-    if (timer) clearTimeout(timer);
+    // 현재 재생 중인 오디오 중지
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+    }
     
     cardPage.style.display = 'none';
     resultPage.style.display = 'block';
@@ -203,8 +204,8 @@ function showResult() {
 
 // 이벤트 리스너 설정
 startBtn.addEventListener('click', () => {
-    const timeInput = document.getElementById('timePerWord');
-    timePerWord = parseInt(timeInput.value) || 5;
+    const repeatSelect = document.getElementById('repeatCount');
+    repeatCount = parseInt(repeatSelect.value) || 2;
     startTime = new Date();
     mainPage.style.display = 'none';
     cardPage.style.display = 'block';
@@ -213,7 +214,12 @@ startBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (timer) clearTimeout(timer);
+    // 현재 재생 중인 오디오 중지
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+    }
+    
     currentIndex++;
     if (currentIndex < words.length) {
         loadWord(currentIndex);
@@ -223,7 +229,6 @@ nextBtn.addEventListener('click', () => {
 });
 
 stopBtn.addEventListener('click', () => {
-    if (timer) clearTimeout(timer);
     const endTime = new Date();
     const duration = Math.floor((endTime - startTime) / 1000);
     saveStudyData(duration, currentIndex + 1);
@@ -253,6 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
     displayStudyStats();
     
     // 기본값 설정
-    const timeInput = document.getElementById('timePerWord');
-    timeInput.value = timePerWord;
+    const repeatSelect = document.getElementById('repeatCount');
+    repeatSelect.value = repeatCount;
 });
