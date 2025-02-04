@@ -114,7 +114,8 @@ function pad(num) {
 // 오디오 반복 재생 함수
 function playAudioWithRepeat(audioFile, repeatCount) {
     let count = 0;
-    const audio = new Audio(`./audio/${audioFile}`);
+    // 절대 경로로 변경
+    const audio = new Audio(`/khu/audio/${audioFile}`);
     
     audio.addEventListener('ended', function() {
         count++;
@@ -124,7 +125,7 @@ function playAudioWithRepeat(audioFile, repeatCount) {
                 audio.play().catch(error => {
                     console.log('Audio playback failed:', error);
                 });
-            }, 1000); // 1초 간격
+            }, 1000);
         }
     });
 
