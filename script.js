@@ -162,7 +162,7 @@ function loadWord(index) {
     }
 
     // 자동 진행 타이머 설정
-    if (timer) clearInterval(timer);
+    if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
         if (currentIndex < words.length - 1) {
             nextBtn.click();
@@ -174,6 +174,30 @@ function loadWord(index) {
 function updateProgress() {
     const progress = ((currentIndex + 1) / words.length) * 100;
     document.getElementById('progressBar').style.width = `${progress}%`;
+}
+
+// 결과 표시 함수
+function showResult() {
+    const endTime = new Date();
+    const duration = Math.floor((endTime - startTime) / 1000);
+    const minutes = Math.floor(duration / 60);
+    const seconds = duration % 60;
+
+    if (timer) clearTimeout(timer);
+    
+    cardPage.style.display = 'none';
+    resultPage.style.display = 'block';
+    
+    const summaryHTML = `
+        <div class="result-summary">
+            <h3>학습 결과</h3>
+            <p>학습한 단어: ${currentIndex + 1}개</p>
+            <p>학습 시간: ${minutes}분 ${seconds}초</p>
+        </div>
+    `;
+    
+    document.getElementById('summary').innerHTML = summaryHTML;
+    displayStudyStats();
 }
 
 // 이벤트 리스너 설정
@@ -199,6 +223,9 @@ nextBtn.addEventListener('click', () => {
 
 stopBtn.addEventListener('click', () => {
     if (timer) clearTimeout(timer);
+    const endTime = new Date();
+    const duration = Math.floor((endTime - startTime) / 1000);
+    saveStudyData(duration, currentIndex + 1);
     showResult();
 });
 
