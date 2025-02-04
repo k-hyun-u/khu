@@ -1,3 +1,4 @@
+// 전역 변수 선언
 let words = [];
 let currentIndex = 0;
 let startTime;
@@ -25,6 +26,7 @@ async function loadWords() {
         const response = await fetch('./words.json');
         const data = await response.json();
         words = data.words;
+        console.log('단어 데이터 로드 완료:', words.length + '개의 단어');
     } catch (error) {
         console.error('Error loading words:', error);
         alert('단어 데이터를 불러오는데 실패했습니다.');
@@ -51,6 +53,7 @@ function saveStudyData(studyTime, wordCount) {
     data.dailyStudy[today].wordCount += wordCount;
     
     localStorage.setItem('studyData', JSON.stringify(data));
+    console.log('학습 데이터 저장 완료');
 }
 
 // 학습 통계 표시 함수
@@ -108,14 +111,27 @@ function pad(num) {
     return num.toString().padStart(2, '0');
 }
 
-// 시작 버튼 클릭 이벤트
-startBtn.addEventListener('click', () => {
-    timePerWord = parseInt(document.getElementById('timePerWord').value);
-    startTime = new Date();
-    mainPage.style.display = 'none';
-    cardPage.style.display = 'block';
-    loadWord(0);
-});
+// 오디오 반복 재생 함수
+function playAudioWithRepeat(audioFile, repeatCount) {
+    let count = 0;
+    const audio = new Audio(`./audio/${audioFile}`);
+    
+    audio.addEventListener('ended', function() {
+        count++;
+        if (count < repeatCount) {
+            setTimeout(() => {
+                audio.currentTime = 0;
+                audio.play().catch(error => {
+                    console.log('Audio playback failed:', error);
+                });
+            }, 1000); // 1초 간격
+        }
+    });
+
+    audio.play().catch(error => {
+        console.log('Audio playback failed:', error);
+    });
+}
 
 // 단어 로드 함수
 function loadWord(index) {
@@ -139,6 +155,19 @@ function loadWord(index) {
     
     document.getElementById('cardContent').innerHTML = cardContent;
     updateProgress();
+
+    // 오디오 재생 (2번 반복)
+    if (word.audioFile) {
+        playAudioWithRepeat(word.audioFile, 2);
+    }
+
+    // 자동 진행 타이머 설정
+    if (timer) clearInterval(timer);
+    timer = setTimeout(() => {
+        if (currentIndex < words.length - 1) {
+            nextBtn.click();
+        }
+    }, timePerWord * 1000);
 }
 
 // 진행률 업데이트
@@ -147,8 +176,19 @@ function updateProgress() {
     document.getElementById('progressBar').style.width = `${progress}%`;
 }
 
-// 다음 버튼 클릭 이벤트
+// 이벤트 리스너 설정
+startBtn.addEventListener('click', () => {
+    const timeInput = document.getElementById('timePerWord');
+    timePerWord = parseInt(timeInput.value) || 5;
+    startTime = new Date();
+    mainPage.style.display = 'none';
+    cardPage.style.display = 'block';
+    currentIndex = 0;
+    loadWord(0);
+});
+
 nextBtn.addEventListener('click', () => {
+    if (timer) clearTimeout(timer);
     currentIndex++;
     if (currentIndex < words.length) {
         loadWord(currentIndex);
@@ -157,38 +197,16 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
-// 중단 버튼 클릭 이벤트
-stopBtn.addEventListener('click', showResult);
+stopBtn.addEventListener('click', () => {
+    if (timer) clearTimeout(timer);
+    showResult();
+});
 
-// 결과 표시 함수
-function showResult() {
-    const endTime = new Date();
-    const duration = Math.floor((endTime - startTime) / 1000);
-    const minutes = Math.floor(duration / 60);
-    const seconds = duration % 60;
-
-    saveStudyData(duration, currentIndex + 1);
-
-    cardPage.style.display = 'none';
-    resultPage.style.display = 'block';
-    
-    const summaryHTML = `
-        <div class="result-summary">
-            <h3>학습 결과</h3>
-            <p>학습한 단어: ${currentIndex + 1}개</p>
-            <p>학습 시간: ${minutes}분 ${seconds}초</p>
-        </div>
-    `;
-    
-    document.getElementById('summary').innerHTML = summaryHTML;
-    displayStudyStats();
-}
-
-// 다시 시작 버튼 클릭 이벤트
 restartBtn.addEventListener('click', () => {
     currentIndex = 0;
     resultPage.style.display = 'none';
     mainPage.style.display = 'block';
+    displayStudyStats();
 });
 
 // 키보드 이벤트 처리
@@ -205,4 +223,8 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('DOMContentLoaded', () => {
     loadWords();
     displayStudyStats();
+    
+    // 기본값 설정
+    const timeInput = document.getElementById('timePerWord');
+    timeInput.value = timePerWord;
 });
