@@ -138,22 +138,6 @@
             transform: scale(0.95);
         }
 
-        /* 음소거 알림 */
-        .mute-notice {
-            display: none;
-            text-align: center;
-            padding: 10px;
-            background: rgba(231, 76, 60, 0.3);
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            cursor: pointer;
-        }
-
-        .mute-notice.show {
-            display: block;
-        }
-
         /* 재생 모드 */
         .play-mode {
             display: flex;
@@ -316,11 +300,6 @@
             <p class="cast-help">버튼을 누르면 TV 목록이 나타나요</p>
         </div>
 
-        <!-- 음소거 알림 -->
-        <div class="mute-notice" id="muteNotice" onclick="unmute()">
-            🔇 소리가 꺼져있어요. 여기를 눌러 소리 켜기
-        </div>
-
         <!-- 비디오 플레이어 -->
         <div class="video-container">
             <video id="videoPlayer" playsinline controls muted>
@@ -424,7 +403,6 @@
         const playBtn = document.getElementById('playBtn');
         const castBtn = document.getElementById('castBtn');
         const castText = document.getElementById('castText');
-        const muteNotice = document.getElementById('muteNotice');
 
         // 초기화
         function init() {
@@ -437,21 +415,14 @@
             autoPlayVideo();
         }
 
-        // 자동 재생 시도
+        // 자동 재생 시도 (음소거)
         function autoPlayVideo() {
             videoPlayer.muted = true;
             videoPlayer.play().then(() => {
-                // 자동 재생 성공 - 음소거 알림 표시
-                muteNotice.classList.add('show');
+                console.log('자동 재생 성공 (음소거)');
             }).catch(err => {
                 console.log('자동 재생 실패:', err);
             });
-        }
-
-        // 음소거 해제
-        function unmute() {
-            videoPlayer.muted = false;
-            muteNotice.classList.remove('show');
         }
 
         // Remote Playback API 설정
@@ -472,9 +443,6 @@
                     castBtn.classList.add('connected');
                     castText.textContent = '📺 TV 연결됨';
                     document.querySelector('.cast-help').textContent = '다시 누르면 연결 해제';
-                    // TV 연결되면 음소거 해제
-                    videoPlayer.muted = false;
-                    muteNotice.classList.remove('show');
                 };
 
                 videoPlayer.remote.ondisconnect = () => {
@@ -488,19 +456,19 @@
 
         // TV 캐스트 실행
         function castToTV() {
-            // 영상이 재생 중인지 확인, 아니면 재생
+            // 1. 먼저 음소거 해제 (사용자 인터랙션)
+            videoPlayer.muted = false;
+            
+            // 2. 영상이 일시정지 상태면 재생
             if (videoPlayer.paused) {
                 videoPlayer.play();
             }
 
-            // Remote Playback API 사용
+            // 3. 캐스트 연결
             if ('remote' in videoPlayer) {
                 videoPlayer.remote.prompt()
                     .then(() => {
                         console.log('TV 연결 성공');
-                        // 연결 성공하면 음소거 해제
-                        videoPlayer.muted = false;
-                        muteNotice.classList.remove('show');
                     })
                     .catch(error => {
                         console.log('TV 연결 실패:', error);
@@ -547,19 +515,15 @@
         // 영상 재생
         function playVideo(index) {
             loadVideo(index);
-            videoPlayer.play();
-            // 사용자가 직접 재생하면 음소거 해제
             videoPlayer.muted = false;
-            muteNotice.classList.remove('show');
+            videoPlayer.play();
         }
 
         // 재생/일시정지
         function togglePlay() {
             if (videoPlayer.paused) {
-                videoPlayer.play();
-                // 재생 버튼 누르면 음소거 해제
                 videoPlayer.muted = false;
-                muteNotice.classList.remove('show');
+                videoPlayer.play();
             } else {
                 videoPlayer.pause();
             }
