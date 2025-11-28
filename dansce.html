@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>라인댄스 비디오 플레이어</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a2e">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .cast-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cast-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .cast-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .cast-btn.active {
+            background: #4ade80;
+            color: #000;
+        }
+
+        .fullscreen-btn {
+            padding: 10px 16px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .fullscreen-btn:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.25);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .playlist-section {
+                order: -1;
+            }
+        }
+
+        .player-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .now-playing {
+            text-align: center;
+            padding: 12px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .now-playing span {
+            color: #a5b4fc;
+            font-weight: bold;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .control-btn {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-btn.primary {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            min-width: 110px;
+            justify-content: center;
+        }
+
+        .control-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .play-mode {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            flex: 1;
+            max-width: 140px;
+            padding: 10px 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .mode-btn.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.3);
+        }
+
+        .mode-btn:hover {
+            border-color: #667eea;
+        }
+
+        .playlist-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .playlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .playlist-header h2 {
+            font-size: 1.1rem;
+        }
+
+        .select-all-btn {
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .select-all-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .playlist {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .playlist::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .playlist::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        .playlist::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .playlist-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .playlist-item.playing {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            border-color: #667eea;
+        }
+
+        .playlist-item.selected {
+            border-color: #4ade80;
+        }
+
+        .playlist-item.playing.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px #4ade80;
+        }
+
+        .item-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .playlist-item.selected .item-checkbox {
+            background: #4ade80;
+            border-color: #4ade80;
+            color: #000;
+        }
+
+        .item-number {
+            width: 28px;
+            height: 28px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .playlist-item.playing .item-number {
+            background: #667eea;
+        }
+
+        .item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-title {
+            font-size: 0.9rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .keyboard-hint {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: #888;
+            text-align: center;
+        }
+
+        .keyboard-hint kbd {
+            background: rgba(255,255,255,0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 라인댄스 비디오</h1>
+            <div class="header-buttons">
+                <button class="fullscreen-btn" onclick="toggleFullscreen()" title="전체화면">⛶</button>
+                <button class="cast-btn" id="castBtn" onclick="castToTV()">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                    </svg>
+                    TV 캐스트
+                </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="player-section">
+                <div class="video-container" id="videoContainer">
+                    <video id="videoPlayer" playsinline controls>
+                        브라우저가 비디오를 지원하지 않습니다.
+                    </video>
+                </div>
+
+                <div class="now-playing">
+                    <span id="currentIndex">1</span> / <span id="totalCount">5</span> · 
+                    <span id="currentTitle">영상을 선택하세요</span>
+                </div>
+
+                <div class="controls">
+                    <button class="control-btn secondary" onclick="prevVideo()">⏮ 이전</button>
+                    <button class="control-btn primary" onclick="togglePlay()" id="playBtn">▶ 재생</button>
+                    <button class="control-btn secondary" onclick="nextVideo()">다음 ⏭</button>
+                </div>
+
+                <div class="play-mode">
+                    <button class="mode-btn active" onclick="setPlayMode('all')" id="modeAll">
+                        🔁 전체 반복
+                    </button>
+                    <button class="mode-btn" onclick="setPlayMode('single')" id="modeSingle">
+                        🔂 단일 반복
+                    </button>
+                    <button class="mode-btn" onclick="setPlayMode('selected')" id="modeSelected">
+                        ✓ 선택만 반복
+                    </button>
+                </div>
+            </div>
+
+            <div class="playlist-section">
+                <div class="playlist-header">
+                    <h2>📁 재생목록</h2>
+                    <button class="select-all-btn" onclick="toggleSelectAll()" id="selectAllBtn">전체 선택</button>
+                </div>
+                <div class="playlist" id="playlist"></div>
+                <div class="keyboard-hint">
+                    <kbd>Space</kbd> 재생/정지 · <kbd>←</kbd><kbd>→</kbd> 이전/다음 · <kbd>F</kbd> 전체화면
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // 🎬 여기에 영상 목록을 설정하세요
+        // ========================================
+        const playlist = [
+            {
+                title: "라인댄스 1",
+                file: "video/YTDown.com_YouTube_Media_LfPG3Chhqrc_001_1080p.mp4"
+            },
+            {
+                title: "라인댄스 2", 
+                file: "video/YTDown.com_YouTube_Media_TwbY4Aduc7M_001_1080p.mp4"
+            },
+            {
+                title: "라인댄스 3",
+                file: "video/YTDown.com_YouTube_Media_mEl68R6Odrs_001_1080p.mp4"
+            },
+            {
+                title: "Mr Showman Line Dance",
+                file: "video/YTDown.com_YouTube_Mr-Showman-Line-Dance-Improver-Rob-Fowle_Media_cNt54D31hdk_001_1080p.mp4"
+            },
+            {
+                title: "Raise Me Up Line Dance Tutorial",
+                file: "video/YTDown.com_YouTube_Tutorial-Raise-Me-Up-NC-linedance_Media_KYrmZ9s2zEI_001_1080p.mp4"
+            }
+        ];
+        // ========================================
+
+        let currentIndex = 0;
+        let playMode = 'all'; // 'all', 'single', 'selected'
+        let selectedVideos = new Set([0, 1, 2, 3, 4]); // 기본: 전체 선택
+        let isPlaying = false;
+
+        const videoPlayer = document.getElementById('videoPlayer');
+        const playlistEl = document.getElementById('playlist');
+        const playBtn = document.getElementById('playBtn');
+        const currentTitleEl = document.getElementById('currentTitle');
+        const currentIndexEl = document.getElementById('currentIndex');
+        const totalCountEl = document.getElementById('totalCount');
+
+        // 초기화
+        function init() {
+            totalCountEl.textContent = playlist.length;
+            renderPlaylist();
+            loadVideo(0);
+        }
+
+        // 재생목록 렌더링
+        function renderPlaylist() {
+            playlistEl.innerHTML = playlist.map((video, index) => `
+                <div class="playlist-item ${index === currentIndex ? 'playing' : ''} ${selectedVideos.has(index) ? 'selected' : ''}" 
+                     onclick="handleItemClick(${index}, event)">
+                    <div class="item-checkbox" onclick="toggleSelect(${index}, event)">
+                        ${selectedVideos.has(index) ? '✓' : ''}
+                    </div>
+                    <div class="item-number">${index + 1}</div>
+                    <div class="item-info">
+                        <div class="item-title">${video.title}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 영상 로드
+        function loadVideo(index) {
+            if (index < 0 || index >= playlist.length) return;
+            
+            currentIndex = index;
+            videoPlayer.src = playlist[index].file;
+            currentTitleEl.textContent = playlist[index].title;
+            currentIndexEl.textContent = index + 1;
+            renderPlaylist();
+        }
+
+        // 영상 재생
+        function playVideo(index) {
+            loadVideo(index);
+            videoPlayer.play();
+        }
+
+        // 아이템 클릭 핸들러
+        function handleItemClick(index, event) {
+            if (event.target.closest('.item-checkbox')) return;
+            playVideo(index);
+        }
+
+        // 선택 토글
+        function toggleSelect(index, event) {
+            event.stopPropagation();
+            if (selectedVideos.has(index)) {
+                selectedVideos.delete(index);
+            } else {
+                selectedVideos.add(index);
+            }
+            renderPlaylist();
+            updateSelectAllBtn();
+        }
+
+        // 전체 선택/해제
+        function toggleSelectAll() {
+            if (selectedVideos.size === playlist.length) {
+                selectedVideos.clear();
+            } else {
+                for (let i = 0; i < playlist.length; i++) {
+                    selectedVideos.add(i);
+                }
+            }
+            renderPlaylist();
+            updateSelectAllBtn();
+        }
+
+        function updateSelectAllBtn() {
+            const btn = document.getElementById('selectAllBtn');
+            btn.textContent = selectedVideos.size === playlist.length ? '전체 해제' : '전체 선택';
+        }
+
+        // 재생/일시정지 토글
+        function togglePlay() {
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+            } else {
+                videoPlayer.pause();
+            }
+        }
+
+        // 이전 영상
+        function prevVideo() {
+            if (playMode === 'selected' && selectedVideos.size > 0) {
+                const sorted = Array.from(selectedVideos).sort((a, b) => a - b);
+                const currentPos = sorted.indexOf(currentIndex);
+                if (currentPos > 0) {
+                    playVideo(sorted[currentPos - 1]);
+                } else {
+                    playVideo(sorted[sorted.length - 1]);
+                }
+            } else {
+                const newIndex = currentIndex <= 0 ? playlist.length - 1 : currentIndex - 1;
+                playVideo(newIndex);
+            }
+        }
+
+        // 다음 영상
+        function nextVideo() {
+            if (playMode === 'selected' && selectedVideos.size > 0) {
+                const sorted = Array.from(selectedVideos).sort((a, b) => a - b);
+                const currentPos = sorted.indexOf(currentIndex);
+                if (currentPos < sorted.length - 1) {
+                    playVideo(sorted[currentPos + 1]);
+                } else {
+                    playVideo(sorted[0]);
+                }
+            } else {
+                const newIndex = currentIndex >= playlist.length - 1 ? 0 : currentIndex + 1;
+                playVideo(newIndex);
+            }
+        }
+
+        // 재생 모드 설정
+        function setPlayMode(mode) {
+            playMode = mode;
+            
+            document.getElementById('modeAll').classList.remove('active');
+            document.getElementById('modeSingle').classList.remove('active');
+            document.getElementById('modeSelected').classList.remove('active');
+            document.getElementById('mode' + mode.charAt(0).toUpperCase() + mode.slice(1)).classList.add('active');
+        }
+
+        // 전체화면
+        function toggleFullscreen() {
+            const container = document.getElementById('videoContainer');
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                (container.requestFullscreen || container.webkitRequestFullscreen || container.msRequestFullscreen).call(container);
+            }
+        }
+
+        // TV 캐스트
+        function castToTV() {
+            const castBtn = document.getElementById('castBtn');
+            
+            // Remote Playback API
+            if ('remote' in videoPlayer) {
+                videoPlayer.remote.watchAvailability(available => {
+                    if (available) {
+                        videoPlayer.remote.prompt().then(() => {
+                            castBtn.classList.add('active');
+                            castBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg> 연결됨`;
+                        }).catch(fallbackCast);
+                    } else {
+                        fallbackCast();
+                    }
+                }).catch(fallbackCast);
+            } 
+            // Presentation API
+            else if (navigator.presentation) {
+                const request = new PresentationRequest([videoPlayer.src]);
+                request.start().then(connection => {
+                    castBtn.classList.add('active');
+                }).catch(fallbackCast);
+            } else {
+                fallbackCast();
+            }
+        }
+
+        function fallbackCast() {
+            // Picture-in-Picture 시도
+            if (document.pictureInPictureEnabled) {
+                videoPlayer.requestPictureInPicture().then(() => {
+                    document.getElementById('castBtn').innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg> PiP 모드`;
+                }).catch(showCastHelp);
+            } else {
+                showCastHelp();
+            }
+        }
+
+        function showCastHelp() {
+            alert('📺 TV 캐스트 방법:\n\n' +
+                '1. Chrome: 메뉴(⋮) → 전송\n' +
+                '2. Edge: 메뉴(···) → 미디어를 장치로 전송\n' +
+                '3. 스마트TV 앱에서 화면 미러링\n' +
+                '4. Chromecast/Fire TV 사용\n\n' +
+                '※ TV와 같은 Wi-Fi에 연결되어야 합니다.');
+        }
+
+        // 비디오 이벤트
+        videoPlayer.addEventListener('ended', () => {
+            if (playMode === 'single') {
+                videoPlayer.currentTime = 0;
+                videoPlayer.play();
+            } else {
+                nextVideo();
+            }
+        });
+
+        videoPlayer.addEventListener('play', () => {
+            isPlaying = true;
+            playBtn.innerHTML = '⏸ 일시정지';
+        });
+
+        videoPlayer.addEventListener('pause', () => {
+            isPlaying = false;
+            playBtn.innerHTML = '▶ 재생';
+        });
+
+        // 키보드 단축키
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            
+            switch(e.code) {
+                case 'Space':
+                    e.preventDefault();
+                    togglePlay();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    prevVideo();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    nextVideo();
+                    break;
+                case 'KeyF':
+                    e.preventDefault();
+                    toggleFullscreen();
+                    break;
+            }
+        });
+
+        // 시작
+        init();
+    </script>
+</body>
+</html>
