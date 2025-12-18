@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>라인댄스 비디오</title>
+    <meta name="theme-color" content="#1a1a2e">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 화면 유지 상태 표시 */
+        .screen-status {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4ade80;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .screen-status.active {
+            display: block;
+        }
+
+        /* TV 캐스트 버튼 */
+        .cast-section {
+            margin-bottom: 15px;
+        }
+
+        .cast-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 24px;
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .cast-btn:hover, .cast-btn:active {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+        }
+
+        .cast-btn.connected {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .cast-btn svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .cast-help {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* 비디오 플레이어 */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 재생 정보 */
+        .now-playing {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .now-playing .title {
+            color: #a5b4fc;
+            font-weight: bold;
+        }
+
+        .loop-status {
+            font-size: 0.9rem;
+            color: #4ade80;
+            margin-top: 5px;
+        }
+
+        /* 컨트롤 버튼 */
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 안내 메시지 */
+        .help-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .help-modal.show {
+            display: block;
+        }
+
+        .help-content {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .help-content h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .help-step {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .help-step strong {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .help-step p {
+            margin-top: 8px;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        .close-help {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 화면 유지 상태 -->
+        <div class="screen-status" id="screenStatus">🔆 화면 켜짐 유지 중</div>
+
+        <!-- TV 캐스트 버튼 -->
+        <div class="cast-section">
+            <button class="cast-btn" id="castBtn" onclick="castToTV()">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                </svg>
+                <span id="castText">TV로 보내기</span>
+            </button>
+            <p class="cast-help">버튼을 누르면 TV 목록이 나타나요</p>
+        </div>
+
+        <!-- 비디오 플레이어 -->
+        <div class="video-container">
+            <video id="videoPlayer" playsinline controls muted loop>
+                <source src="video/total.mp4" type="video/mp4">
+                브라우저가 비디오를 지원하지 않습니다.
+            </video>
+        </div>
+
+        <!-- 재생 정보 -->
+        <div class="now-playing">
+            <div class="title">🎬 라인댄스 모음</div>
+            <div class="loop-status">🔁 무한 반복 재생</div>
+        </div>
+
+        <!-- 컨트롤 버튼 -->
+        <div class="controls">
+            <button class="control-btn" onclick="togglePlay()" id="playBtn">▶ 재생</button>
+        </div>
+    </div>
+
+    <!-- 도움말 모달 -->
+    <div class="help-modal" id="helpModal">
+        <div class="help-content">
+            <h2>📺 TV 연결 방법</h2>
+            
+            <div class="help-step">
+                <strong>1. 같은 Wi-Fi 확인</strong>
+                <p>휴대폰과 TV가 같은 Wi-Fi에 연결되어 있어야 해요</p>
+            </div>
+            
+            <div class="help-step">
+                <strong>2. TV 전원 켜기</strong>
+                <p>스마트TV 전원이 켜져 있는지 확인하세요</p>
+            </div>
+            
+            <div class="help-step">
+                <strong>3. 다시 버튼 누르기</strong>
+                <p>"TV로 보내기" 버튼을 다시 눌러보세요. TV 목록이 나타나면 원하는 TV를 선택하세요</p>
+            </div>
+
+            <div class="help-step">
+                <strong>💡 안될 경우</strong>
+                <p>Chrome 앱의 메뉴(⋮)에서 "전송"을 눌러 TV를 선택할 수도 있어요</p>
+            </div>
+            
+            <button class="close-help" onclick="closeHelp()">확인</button>
+        </div>
+    </div>
+
+    <script>
+        let wakeLock = null;
+        const videoPlayer = document.getElementById('videoPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const castBtn = document.getElementById('castBtn');
+        const castText = document.getElementById('castText');
+        const screenStatus = document.getElementById('screenStatus');
+
+        // ========================================
+        // 🔆 Wake Lock - 화면 안 꺼지게
+        // ========================================
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    screenStatus.classList.add('active');
+                    console.log('Wake Lock 활성화');
+                    
+                    wakeLock.addEventListener('release', () => {
+                        screenStatus.classList.remove('active');
+                        console.log('Wake Lock 해제됨');
+                    });
+                }
+            } catch (err) {
+                console.log('Wake Lock 실패:', err);
+            }
+        }
+
+        document.addEventListener('visibilitychange', async () => {
+            if (document.visibilityState === 'visible' && !videoPlayer.paused) {
+                await requestWakeLock();
+            }
+        });
+
+        // ========================================
+        // 초기화
+        // ========================================
+        function init() {
+            setupRemotePlayback();
+            autoPlayVideo();
+            
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(() => console.log('Service Worker 등록 완료'))
+                    .catch(err => console.log('Service Worker 등록 실패:', err));
+            }
+        }
+
+        function autoPlayVideo() {
+            videoPlayer.muted = true;
+            videoPlayer.play().then(() => {
+                console.log('자동 재생 성공');
+                requestWakeLock();
+            }).catch(err => {
+                console.log('자동 재생 실패:', err);
+            });
+        }
+
+        function setupRemotePlayback() {
+            if ('remote' in videoPlayer) {
+                videoPlayer.remote.watchAvailability(available => {
+                    if (available) {
+                        document.querySelector('.cast-help').textContent = 'TV가 감지되었어요! 버튼을 누르세요';
+                    }
+                }).catch(() => {});
+
+                videoPlayer.remote.onconnecting = () => {
+                    castText.textContent = '연결 중...';
+                };
+
+                videoPlayer.remote.onconnect = () => {
+                    castBtn.classList.add('connected');
+                    castText.textContent = '📺 TV 연결됨';
+                    document.querySelector('.cast-help').textContent = '다시 누르면 연결 해제';
+                };
+
+                videoPlayer.remote.ondisconnect = () => {
+                    castBtn.classList.remove('connected');
+                    castText.textContent = 'TV로 보내기';
+                    document.querySelector('.cast-help').textContent = '버튼을 누르면 TV 목록이 나타나요';
+                };
+            }
+        }
+
+        function castToTV() {
+            videoPlayer.muted = false;
+            
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+            }
+            
+            requestWakeLock();
+
+            if ('remote' in videoPlayer) {
+                videoPlayer.remote.prompt()
+                    .then(() => {
+                        console.log('TV 연결 성공');
+                    })
+                    .catch(error => {
+                        console.log('TV 연결 실패:', error);
+                        if (error.name === 'NotFoundError' || error.name === 'NotSupportedError') {
+                            showHelp();
+                        }
+                    });
+            } else {
+                showHelp();
+            }
+        }
+
+        function showHelp() {
+            document.getElementById('helpModal').classList.add('show');
+        }
+
+        function closeHelp() {
+            document.getElementById('helpModal').classList.remove('show');
+        }
+
+        function togglePlay() {
+            if (videoPlayer.paused) {
+                videoPlayer.muted = false;
+                videoPlayer.play();
+                requestWakeLock();
+            } else {
+                videoPlayer.pause();
+            }
+        }
+
+        videoPlayer.addEventListener('play', () => {
+            playBtn.innerHTML = '⏸ 정지';
+            requestWakeLock();
+        });
+
+        videoPlayer.addEventListener('pause', () => {
+            playBtn.innerHTML = '▶ 재생';
+        });
+
+        init();
+    </script>
+</body>
+</html>

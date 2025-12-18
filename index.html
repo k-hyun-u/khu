@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <title>엄마의 댄스 영어 단어 🤣</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+    
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+    
+        .study-stats {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    
+        .stat-item {
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 20px;
+        }
+    
+        .stat-label {
+            font-weight: bold;
+            color: #333;
+        }
+    
+        .stat-value {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    
+        .settings {
+            margin: 30px 0;
+            text-align: center;
+        }
+    
+        .settings label {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+    
+        #repeatCount {
+            padding: 15px;
+            font-size: 24px;
+            width: 150px;
+            margin: 10px auto 30px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            text-align: center;
+            display: block;
+        }
+    
+        .word-card {
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+    
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    
+        .word-card .english {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2196F3;
+        }
+    
+        .word-card .pronunciation {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    
+        .word-card .korean {
+            font-size: 28px;
+            line-height: 1.5;
+            color: #444;
+        }
+    
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+    
+        #progressBar {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+    
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+    
+        #manualControls {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    
+        #manualControls button {
+            width: 45%;
+            max-width: 250px;
+            margin: 0;
+        }
+    
+        button {
+            padding: 20px;
+            font-size: 24px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    
+        #autoStartBtn {
+            width: 80%;
+            max-width: 400px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 10px auto;
+        }
+    
+        #manualStartBtn {
+            width: 80%;
+            max-width: 400px;
+            background-color: #2196F3;
+            color: white;
+            margin: 10px auto;
+        }
+    
+        #nextBtn {
+            background-color: #4CAF50;
+            color: white;
+            position: relative;
+            padding-right: 50px;
+        }
+    
+        #nextBtn:after {
+            content: '→';
+            position: absolute;
+            right: 30px;
+            transition: all 0.3s ease;
+        }
+    
+        #nextBtn:hover:after {
+            transform: translateX(5px);
+        }
+    
+        #replayBtn {
+            background-color: #FFC107;
+            color: #333;
+            position: relative;
+            padding-left: 50px;
+        }
+    
+        #replayBtn:before {
+            content: '↺';
+            position: absolute;
+            left: 30px;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+    
+        #replayBtn:hover:before {
+            transform: rotate(-30deg);
+        }
+    
+        #stopBtn {
+            width: 90%;
+            max-width: 520px;
+            background-color: #ff6b6b;
+            color: white;
+            margin: 0 auto;
+        }
+    
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+    
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    
+        .result-summary {
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+    
+        .result-summary h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+    
+        .result-summary p {
+            font-size: 24px;
+            color: #666;
+            margin: 10px 0;
+        }
+    
+        #restartBtn {
+            width: 80%;
+            max-width: 400px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 20px auto;
+            display: block;
+        }
+    
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+    
+            .container {
+                padding: 15px;
+            }
+    
+            #manualControls {
+                flex-direction: column;
+                gap: 10px;
+            }
+    
+            #manualControls button {
+                width: 90%;
+                max-width: none;
+            }
+    
+            button {
+                width: 90%;
+                font-size: 20px;
+                padding: 15px;
+            }
+    
+            .word-card .english {
+                font-size: 22px;
+            }
+    
+            .word-card .pronunciation {
+                font-size: 28px;
+            }
+    
+            .word-card .korean {
+                font-size: 24px;
+            }
+    
+            .settings label {
+                font-size: 20px;
+            }
+    
+            #repeatCount {
+                font-size: 20px;
+                width: 120px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <div id="mainPage">
+            <h1>엄마의 댄스 영어 단어 🤣</h1>
+            <div class="settings">
+                <label for="repeatCount">단어 반복 횟수</label>
+                <select id="repeatCount">
+                    <option value="1">1회</option>
+                    <option value="2" selected>2회</option>
+                    <option value="3">3회</option>
+                    <option value="4">4회</option>
+                    <option value="5">5회</option>
+                </select>
+                <button id="autoStartBtn">자동 반복 학습 시작</button>
+                <button id="manualStartBtn">한 단어씩 학습 시작</button>
+                <div id="statsContainer"></div>
+            </div>
+        </div>
+
+        <div id="cardPage" style="display: none;">
+            <div id="cardContent"></div>
+            <div class="progress-bar">
+                <div id="progressBar"></div>
+            </div>
+            <div class="controls">
+                <div id="manualControls" style="display: none;">
+                    <button id="nextBtn">다음</button>
+                    <button id="replayBtn">다시 듣기</button>
+                </div>
+                <button id="stopBtn">중단</button>
+            </div>
+        </div>
+
+        <div id="resultPage" style="display: none;">
+            <div id="summary"></div>
+            <button id="restartBtn">다시 시작</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

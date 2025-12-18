@@ -1,0 +1,334 @@
+{
+  "words": [
+    {
+      "english": "step",
+      "pronunciation": "스텝",
+      "korean": "한쪽 발을 어느 방향이든지 내고, 그 발에 체중을 옮기는 것",
+      "audioFile": "step.mp3"
+    },
+    {
+      "english": "touch",
+      "pronunciation": "터치",
+      "korean": "한쪽 발로 바닥을 가볍게 찍는 것처럼 대었다 드는 동작",
+      "audioFile": "touch.mp3"
+    },
+    {
+      "english": "point",
+      "pronunciation": "포인트",
+      "korean": "한쪽 발끝 또는 뒤꿈치로 어느 지점을 찍는 동작으로 보통 체중을 옮기지 않음",
+      "audioFile": "point.mp3"
+    },
+    {
+      "english": "cross",
+      "pronunciation": "크로쓰",
+      "korean": "오른(왼)발을 반대 발 앞이나 뒤로 엮는 동작",
+      "audioFile": "cross.mp3"
+    },
+    {
+      "english": "tap",
+      "pronunciation": "탭",
+      "korean": "한쪽 발로 땅바닥을 가볍게 두드리는 것으로 보통 볼로 행해지는 동작",
+      "audioFile": "tap.mp3"
+    },
+    {
+      "english": "brush",
+      "pronunciation": "브러쉬",
+      "korean": "볼로 바닥을 킥하는 듯이 스치는 동작",
+      "audioFile": "brush.mp3"
+    },
+    {
+      "english": "scuff",
+      "pronunciation": "스커프",
+      "korean": "뒤꿈치로 바닥을 스쳐 다리를 앞으로 들어 올리는 동작",
+      "audioFile": "scuff.mp3"
+    },
+    {
+      "english": "kick",
+      "pronunciation": "킥",
+      "korean": "발을 뻗어 차올리는 동작",
+      "audioFile": "kick.mp3"
+    },
+    {
+      "english": "hook",
+      "pronunciation": "훅",
+      "korean": "갈고리 모양처럼 무릎과 발목을 굽혀 다른 발목에 걸듯이 행하는 동작",
+      "audioFile": "hook.mp3"
+    },
+    {
+      "english": "hitch",
+      "pronunciation": "히치",
+      "korean": "무릎을 굽혀 당겨 올리는 동작",
+      "audioFile": "hitch.mp3"
+    },
+    {
+      "english": "flick",
+      "pronunciation": "플릭",
+      "korean": "무릎이나 그 아래를 날렵하게 무릎을 구부렸다가 발끝을 흔들듯이 움직이는 동작",
+      "audioFile": "flick.mp3"
+    },
+    {
+      "english": "stomp",
+      "pronunciation": "스탐프",
+      "korean": "발로 바닥을 세게 구르는 동작",
+      "audioFile": "stomp.mp3"
+    },
+    {
+      "english": "strut",
+      "pronunciation": "스트럿",
+      "korean": "(토)를 먼저 딛고 토(힐)를 드롭하는 동작",
+      "audioFile": "strut.mp3"
+    },
+    {
+      "english": "slide",
+      "pronunciation": "슬라이드",
+      "korean": "한발을 바닥에 밀어 그 발에 체중을 옮기는 동작",
+      "audioFile": "slide.mp3"
+    },
+    {
+      "english": "drag draw",
+      "pronunciation": "드레그 드로우",
+      "korean": "끌어당기는 동작이나 발을 끄는 동작",
+      "audioFile": "dragdraw.mp3"
+    },
+    {
+      "english": "ronde",
+      "pronunciation": "란드",
+      "korean": "원을 그리듯이 발을 돌리는 동작",
+      "audioFile": "ronde.mp3"
+    },
+    {
+      "english": "sweep",
+      "pronunciation": "스윕",
+      "korean": "비로 쓸다 라는 의미가 있으며 앞에서 뒤 또는 뒤에서 앞으로 발끝으로 원을 그리는 동작",
+      "audioFile": "sweep.mp3"
+    },
+    {
+      "english": "lunge",
+      "pronunciation": "런지",
+      "korean": "내딛기 라는 의미이며, 스텝을 앞이나 옆이나 뒤로 크게 내딛으며 체중을 옮기는 동작",
+      "audioFile": "lunge.mp3"
+    },
+    {
+      "english": "together",
+      "pronunciation": "터게더",
+      "korean": "두발을 나란히 모으는 것",
+      "audioFile": "together.mp3"
+    },
+    {
+      "english": "shimmy",
+      "pronunciation": "쉬미",
+      "korean": "어깨 또는 상체를 흔드는 동작",
+      "audioFile": "shimmy.mp3"
+    },
+    {
+      "english": "bump",
+      "pronunciation": "범프",
+      "korean": "부딪치기 를 의미하며, 힘을 좌우로 움직이는 형태",
+      "audioFile": "bump.mp3"
+    },
+    {
+      "english": "sway",
+      "pronunciation": "쉐",
+      "korean": "몸을 조우로 경사지게 흔드는 동작",
+      "audioFile": "sway.mp3"
+    },
+    {
+      "english": "swivel",
+      "pronunciation": "스위블",
+      "korean": "비비다 라는 의미",
+      "audioFile": "swivel.mp3"
+    },
+    {
+      "english": "clap",
+      "pronunciation": "크랩",
+      "korean": "박수치기",
+      "audioFile": "clap.mp3"
+    },
+    {
+      "english": "snap",
+      "pronunciation": "스냅",
+      "korean": "업지손가락과 장지손가락을 붙여 튕기어 소리를 내는 것",
+      "audioFile": "snap.mp3"
+    },
+    {
+      "english": "count",
+      "pronunciation": "카운트",
+      "korean": "춤을 가르치거나 연습할 때 쓰는 구령, 스텝의 리듬을 세는 것",
+      "audioFile": "count.mp3"
+    },
+    {
+      "english": "syncopation",
+      "pronunciation": "싱커페이션",
+      "korean": "박자에 변화를 주는 형태",
+      "audioFile": "syncopation.mp3"
+    },
+    {
+      "english": "restart",
+      "pronunciation": "리스타트",
+      "korean": "정해진 일정한 박자에 맞춰 동작이 진행되다가 음악의 길이에 따라 처음 동작부터 다시 시작하는 형태",
+      "audioFile": "restart.mp3"
+    },
+    {
+      "english": "tag",
+      "pronunciation": "태그",
+      "korean": "꼬리표 라는 의미이며, 박자가 일정한 길이로 진행되다가 어느 부분에서 박자가 길어져서 동작을 추가하는 형태",
+      "audioFile": "tag.mp3"
+    },
+    {
+      "english": "hold",
+      "pronunciation": "홀드",
+      "korean": "그대로의 상태를 1카운트 유지하는 것",
+      "audioFile": "hold.mp3"
+    },
+    {
+      "english": "grapevine",
+      "pronunciation": "그레입바인",
+      "korean": "오른(왼)발 옆으로 스텝(1), 왼(오른)발을 오른(왼)발 뒤에 크로스(2), 오른(왼)발 옆으로 스텝(3), 보통 vine step이라 한다",
+      "audioFile": "grapevine.mp3"
+    },
+    {
+      "english": "overvine",
+      "pronunciation": "오버바인",
+      "korean": "왼발을 오른발 앞에 크로스(1), 오른발을 옆으로 스텝(2), 왼발을 오른발 뒤에 크로스(3)",
+      "audioFile": "overvine.mp3"
+    },
+    {
+      "english": "weave",
+      "pronunciation": "위브",
+      "korean": "왼발을 오른발 앞에 크로스(1), 오른발 옆으로 스텝(2), 왼발을 오른발 뒤에 크로스(3), 오른발 옆으로 스텝(4)",
+      "audioFile": "weave.mp3"
+    },
+    {
+      "english": "rock and recover",
+      "pronunciation": "락앤리커버",
+      "korean": "체중을 왼발에서 오른발 또는 오른발에서 왼발로 바꾸어 옮기는 동작",
+      "audioFile": "rockandrecover.mp3"
+    },
+    {
+      "english": "rocking chair",
+      "pronunciation": "라킹체어",
+      "korean": "오른발을 앞으로 락 스텝(1), 왼발 제자리 스텝(2), 오른발 뒤로 라 스텝(3), 왼발 제자리 스텝(4)",
+      "audioFile": "rockingchair.mp3"
+    },
+    {
+      "english": "jazz box",
+      "pronunciation": "째즈박스",
+      "korean": "오른발을 왼발 옆으로 크로스(1), 왼발 뒤로 스텝(2), 오른발 옆으로 스텝(3), 왼발을 오른발에 모으며 스텝(4)",
+      "audioFile": "jazzbox.mp3"
+    },
+    {
+      "english": "shuffle step",
+      "pronunciation": "셔플 스텝",
+      "korean": "스텝(1)모아(2) 스텝(3), 발바닥 전체로 바닥을 문지르듯이 발을 끌며 걷는다.",
+      "audioFile": "shufflestep.mp3"
+    },
+    {
+      "english": "cha cha cha",
+      "pronunciation": "차 차 차",
+      "korean": "오른(왼)발을 옆으로 스텝(1), 왼발을 오른발 옆에 모으며 스텝(&), 오른발 옆으로 스텝(2)(제자리, 앞, 옆, 뒤 방향 가능)",
+      "audioFile": "chachacha.mp3"
+    },
+    {
+      "english": "lock step",
+      "pronunciation": "락 스텝",
+      "korean": "오른발과 발이 앞뒤로 엇갈린 상태로 자물쇠로 채우듯 고정시키는 동작",
+      "audioFile": "lockstep.mp3"
+    },
+    {
+      "english": "manbo",
+      "pronunciation": "만보",
+      "korean": "오른발을 앞(옆)으로 락 스텝(1), 왼발 제자리 스텝(2), 오른발 왼발 옆에 모으는 스텝(3)",
+      "audioFile": "manbo.mp3"
+    },
+    {
+      "english": "coaster",
+      "pronunciation": "코스터",
+      "korean": "오른발 (뒤)으로 스텝(1), 왼발을 오른발 옆에 모으며 스텝(2), 오른발 뒤(앞)로 스텝(3)",
+      "audioFile": "coaster.mp3"
+    },
+    {
+      "english": "sailor step",
+      "pronunciation": "세일러 스텝",
+      "korean": "오른발을 발 뒤에 크로스(1), 왼발은 옆으로 스텝(2), 오른발 제자리 스텝(3)",
+      "audioFile": "sailorstep.mp3"
+    },
+    {
+      "english": "scissor step",
+      "pronunciation": "시저 스텝",
+      "korean": "오른발을 옆으로 스텝(1), 왼발은 오른발 옆에 모으며 스텝(2), 오른발을 왼발 앞에 크로스(3)",
+      "audioFile": "scissorstep.mp3"
+    },
+    {
+      "english": "kick ball change",
+      "pronunciation": "킥 볼 체인지",
+      "korean": "오른(왼)발을 앞으로 한 후(1), 볼로 딛고(2), 왼(오른)발에 체중을 옮기는 동작(3)",
+      "audioFile": "kickballchange.mp3"
+    },
+    {
+      "english": "skate step",
+      "pronunciation": "스케이트 스텝",
+      "korean": "발을 비껴 앞으로 슬라이드하는 스텝",
+      "audioFile": "skatestep.mp3"
+    },
+    {
+      "english": "charleston",
+      "pronunciation": "찰스턴",
+      "korean": "오른(왼)발을 전후 좌우로 무릎을 가볍게 움직이면서 발끝이나 뒤꿈치로 찍으며 닫는 동작",
+      "audioFile": "charleston.mp3"
+    },
+    {
+      "english": "sugar foot",
+      "pronunciation": "슈가 풋",
+      "korean": "발끝을 제자리에서 안쪽으로 찍고, 뒤꿈치를 아웃시켜 찍는 동작",
+      "audioFile": "sugarfoot.mp3"
+    },
+    {
+      "english": "monterey turn",
+      "pronunciation": "몬트레이 턴",
+      "korean": "왼 무릎은 약간 굽히고 오른발을 옆으로 터치(1) 후, 오른쪽으로 12 또는 14회전하면서 왼발을 모으며 스텝(2). 왼발을 옆으로 뻗어낸(3) 후 오른발을 모으며 스텝(4)",
+      "audioFile": "montereyturn.mp3"
+    },
+    {
+      "english": "pivot turn",
+      "pronunciation": "피봇 턴",
+      "korean": "체중을 한쪽 발에 완전히 싣고(1), 회전하는 동작으로 이때 다른 발은 체중 없이 앞 혹은 뒤에 두고 회전(2)",
+      "audioFile": "pivotturn.mp3"
+    },
+    {
+      "english": "rock turn",
+      "pronunciation": "락 턴",
+      "korean": "오른발을 앞으로 락 스텝(1), 왼발 제자리 스텝(2), 오른쪽 방향으로 회전 오른발 앞으로 스텝(3)",
+      "audioFile": "rockturn.mp3"
+    },
+    {
+      "english": "rolling turn",
+      "pronunciation": "롤링 턴",
+      "korean": "한쪽 방향으로 쓰리 스텝으로 도는 동작",
+      "audioFile": "rollingturn.mp3"
+    },
+    {
+      "english": "reverse turn",
+      "pronunciation": "리버스 턴",
+      "korean": "뒤로 도는 동작",
+      "audioFile": "reverseturn.mp3"
+    },
+    {
+      "english": "twinkle",
+      "pronunciation": "트윙클",
+      "korean": "뒤로 도는 동작",
+      "audioFile": "twinkle.mp3"
+    },
+    {
+      "english": "waltz step",
+      "pronunciation": "왈츠 스텝",
+      "korean": "오른발을 왼발 앞에 크로스(1), 왼발 옆으로 스텝(2), 오른발 제자리 스텝(3), 뒤로도 행할 수 있음 waltz step : 오른발 앞으로 스텝(1), 왼발을 앞으로 스텝(2), 오른발을 왼발에 모은다(3), 뒤로도 행할 수 있음",
+      "audioFile": "waltzstep.mp3"
+    },
+    {
+      "english": "balance step",
+      "pronunciation": "밸런스 스텝",
+      "korean": "오른발이 오른쪽 옆으로 스텝(1), 왼발이 오른발 뒤로 크로스 스텝(2), 오른발 제자리 스텝(3)",
+      "audioFile": "balancestep.mp3"
+    }
+  ]
+}

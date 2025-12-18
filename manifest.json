@@ -1,0 +1,35 @@
+{
+    "name": "엄마의 댄스 단어😝",
+    "short_name": "Dance Terms",
+    "description": "댄스 용어 학습 앱",
+    "start_url": "/khu/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4CAF50",
+    "icons": [
+        {
+            "src": "icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "라인댄스 비디오",
+            "short_name": "비디오",
+            "description": "라인댄스 비디오 재생",
+            "url": "/khu/dansce.html",
+            "icons": [
+                {
+                    "src": "icons/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ]
+}
